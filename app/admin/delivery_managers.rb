@@ -1,5 +1,10 @@
 ActiveAdmin.register DeliveryManager do
-  permit_params :email, :password, :password_confirmation
+  permit_params(:email,
+                :password,
+                :password_confirmation,
+                :current_sign_in_at,
+                :sign_in_count,
+                :created_at)
 
   index do
     selectable_column
