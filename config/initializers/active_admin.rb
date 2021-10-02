@@ -58,6 +58,7 @@ ActiveAdmin.setup do |config|
 
   # == User Authorization
   #
+  # config.authorization_adapter = 'OnlyEnabled'
   # Active Admin will automatically call an authorization
   # method in a before filter of all controller actions to
   # ensure that there is a user with proper rights. You can use

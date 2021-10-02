@@ -1,22 +1,21 @@
 ActiveAdmin.register DeliveryManager do
+  menu if: proc{ current_delivery_manager.enabled? }
   permit_params(:email,
+                :enabled,
                 :password,
                 :password_confirmation,
-                :created_at,
-                :enabled)
+                :created_at)
 
   index do
     selectable_column
     id_column
     column :email
-    column :enabled
     column :created_at
     actions
   end
 
   filter :email
   filter :created_at
-  filter :enabled
 
   form do |f|
     f.inputs do
@@ -26,5 +25,4 @@ ActiveAdmin.register DeliveryManager do
     end
     f.actions
   end
-
 end
