@@ -4,18 +4,21 @@ ActiveAdmin.register DeliveryManager do
                 :enabled,
                 :password,
                 :password_confirmation,
-                :created_at)
+                :created_at,
+                :updated_at)
 
   index do
     selectable_column
     id_column
     column :email
     column :created_at
+    column :updated_at
     actions
   end
 
   filter :email
   filter :created_at
+  filter :updated_at
 
   form do |f|
     f.inputs do
