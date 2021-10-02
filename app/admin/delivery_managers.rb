@@ -1,5 +1,7 @@
 ActiveAdmin.register DeliveryManager do
+  menu if: proc{ current_delivery_manager.enabled? }
   permit_params(:email,
+                :enabled,
                 :password,
                 :password_confirmation,
                 :current_sign_in_at,
@@ -10,6 +12,7 @@ ActiveAdmin.register DeliveryManager do
     selectable_column
     id_column
     column :email
+    column :enabled
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -17,6 +20,7 @@ ActiveAdmin.register DeliveryManager do
   end
 
   filter :email
+  filter :enabled
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
@@ -28,6 +32,14 @@ ActiveAdmin.register DeliveryManager do
       f.input :password_confirmation
     end
     f.actions
+  end
+
+  controller do
+    before_action :check_for_administrator
+
+    def check_for_administrator
+      new_delivery_manager_session_path unless current_delivery_manager.enabled?
+    end
   end
 
 end
