@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_074219) do
+ActiveRecord::Schema.define(version: 2021_10_03_055515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(version: 2021_09_22_074219) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_delivery_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_delivery_managers_on_reset_password_token", unique: true
+    t.check_constraint "enabled = true", name: "enabled_check"
+  end
+
+  create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.date "estimated_delivery_date"
+    t.string "tracking_number", null: false
+    t.string "delivery_status", default: "new"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tracking_number"], name: "index_packages_on_tracking_number", unique: true
   end
 
 end

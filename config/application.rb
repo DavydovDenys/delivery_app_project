@@ -36,6 +36,7 @@ module DeliveryAppProject
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.active_record.schema_format = :sql
+    config.active_record.schema_format = :ruby
     config.api_only = true
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
