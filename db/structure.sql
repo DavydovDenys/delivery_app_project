@@ -94,6 +94,20 @@ CREATE TABLE public.delivery_managers (
 
 
 --
+-- Name: packages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.packages (
+    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    estimated_delivery_date date,
+    tracking_number character varying NOT NULL,
+    delivery_status character varying DEFAULT 'new'::character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -131,6 +145,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.delivery_managers
     ADD CONSTRAINT delivery_managers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: packages packages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.packages
+    ADD CONSTRAINT packages_pkey PRIMARY KEY (id);
 
 
 --
@@ -188,6 +210,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210922052157'),
 ('20210922052212'),
 ('20210922074219'),
-('20210929124647');
+('20210929124647'),
+('20211003055515');
 
 
