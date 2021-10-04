@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_03_055515) do
+ActiveRecord::Schema.define(version: 2021_10_04_080719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2021_10_03_055515) do
   end
 
   create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.date "estimated_delivery_date"
+    t.string "estimated_delivery_date", default: ""
     t.string "tracking_number", null: false
     t.string "delivery_status", default: "new"
     t.datetime "created_at", precision: 6, null: false

@@ -5,15 +5,15 @@ class PackagesController < ApiController
 
     if @package.valid?
       @package.save
-      render json: { package: @package, status: :created }
+      render json: PackageSerializer.new(@package).serializable_hash, status: :created
     else
-      render json: { errors: @package.errors.full_messages, status: :unprocessable_entity }
+      render json: ErrorsSerializer.new(@package), status: :bad_request
     end
   end
 
   private
 
   def package_params
-    params.require(:package).permit(:estimated_delivery_date, :tracking_number, :delivery_status)
+    params.require(:package).permit(:estimated_delivery_date, :delivery_status)
   end
 end
